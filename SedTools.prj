@@ -1,8 +1,8 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="527363414" file="D:\Work\Tools\MATLAB\MUImodels2\muiApps\SedTools\SedTools.prj" location="D:\Work\Tools\MATLAB\MUImodels2\muiApps\SedTools" name="SedTools" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="1267412203" file="D:\Work\Tools\MATLAB\MUImodels2\muiApps\SedTools\SedTools.prj" location="D:\Work\Tools\MATLAB\MUImodels2\muiApps\SedTools" name="SedTools" target="target.mlapps" target-name="Package App">
     <param.appname>SedTools</param.appname>
     <param.authnamewatermark>Ian Townend</param.authnamewatermark>
-    <param.email>enquiries@coastalsea.uk</param.email>
+    <param.email>i.townend@soton.ac.uk</param.email>
     <param.company>University of Southampton</param.company>
     <param.icon>${PROJECT_ROOT}\SedTools_resources\icon_24.png</param.icon>
     <param.icons>
@@ -12,7 +12,7 @@
     </param.icons>
     <param.summary>Application for the analysis of settling column data</param.summary>
     <param.description>Loads settling column output files generates sediment grain size distributions and summary data</param.description>
-    <param.screenshot>${PROJECT_ROOT}\SedTools_logo.jpg</param.screenshot>
+    <param.screenshot />
     <param.version>1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
@@ -27,6 +27,7 @@
     <param.output>${PROJECT_ROOT}</param.output>
     <param.guid>be75f07c-b943-4104-a732-fe771a77f928</param.guid>
     <unset>
+      <param.screenshot />
       <param.version />
       <param.platforms />
       <param.output />
