@@ -199,7 +199,7 @@ classdef SedTools < muiModelUI
 
         %% Help menu ------------------------------------------------------
         function Help(~,~,~)
-            doc SedTools                               
+            docsearch SedTools                               
         end        
     end
 end
