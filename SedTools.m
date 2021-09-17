@@ -130,7 +130,7 @@ classdef SedTools < muiModelUI
             tabs.Cases  = {'   Cases  ',@obj.refresh};      
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData};
-            % tabs.Stats = {'   Stats   ',@obj.getTabData};
+            tabs.Stats = {'   Stats   ',@obj.getTabData};
             subtabs = [];
         end 
  %%
@@ -147,9 +147,11 @@ classdef SedTools < muiModelUI
             %tab (src)
             switch src.Tag                   
                 case 'Plot' 
-                     tabPlot(cobj,src);
+                    tabPlot(cobj,src);
                 case 'Stats'
-                     tabStats(cobj,src);    
+                    lobj = getClassObj(obj,'mUI','Stats',msg);
+                    if isempty(lobj), return; end
+                    tabStats(lobj,src);    
             end
         end
         
