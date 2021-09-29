@@ -17,7 +17,7 @@
 
 %% SedTools classes
 % * *SedTools* - defines the behaviour of the main UI.
-% * *SettlingParams* defines the input parameters.
+% * *SettlingParams* - defines the input parameters.
 % * *SettlingAnalysis* - handles the running of settling_column function,
 % saving of results and display on the Q-Plot tab.
 
