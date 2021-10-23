@@ -130,7 +130,7 @@ classdef SedTools < muiModelUI
             tabs.Cases  = {'   Cases  ',@obj.refresh};      
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData};
-            tabs.Stats = {'   Stats   ',@obj.getTabData};
+            tabs.Stats = {'   Stats   ',@obj.setTabAction};
             subtabs = [];
         end 
  %%
