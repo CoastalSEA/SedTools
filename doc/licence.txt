@@ -1,13 +1,15 @@
 #  Copyright (C) 2018 CoastalSEA
-#  SedTools software program, including supporting toolboxes: muitoolbox and dstoolbox
-
+#  dstoolbox, muitoolbox, Asmita, CoastalTools, CSTmodel, ModelSkill,
+#  ModelUI, MRBreach, SedTools
+#  and all functions, manuals and supporting material packaged within the toolbox
+#  or App distribution package.
 #
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
+#  These programs are free software; you can redistribute them and/or modify
+#  them under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
 #  (at your option) any later version.
 #
-#  This program is distributed in the hope that it will be useful,
+#  These programs are distributed in the hope that they will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
@@ -15,8 +17,20 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
+
 Other functions used in the package and developed by others are provided under the following terms
-settling_column.m is based on cal_settling by Urs Neumeier, 2005
+
+- wind_rose.m Copyright © 2009, M MA
+- difffusion2Dmodel.m is based on Diffusion_2D Copyright © 2012, Suraj Shankar
+- inpaint_nans.m by John D'Errico Copyright © 2012
+- lambertw.m Pascal Getreuer © 2005-2006 as modified by Didier Clamond, Copyright © 2005
+- downsample.m is based on code by Chad A. Greene, Copyright © 2014 
+- mat2clip.m Copyright © 2009 The MathWorks, Inc.
+- moving.m by Aslak Grinsted Copyright © 2007
+- peakseek.m by Peter O'Connor Copyright © 2010
+- sort_nat.m by Douglas Schwarz Copyright © 2021
+- uigetdate.m by Elmar Tarajan Copyright © 2008
+
 
 All rights reserved.
 
