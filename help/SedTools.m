@@ -1,5 +1,5 @@
 %% SedTools
-% Toolbox for analysis of settling column data
+% Matlab App for analysis of settling column data
 
 %% Licence
 % The code is provided as Open Source code (issued under a GNU General 
@@ -8,7 +8,7 @@
 %% Requirements
 % SedTools is written in Matlab(TM) and requires v2016b, or later. In addition, 
 % SedTools requires both the <matlab:doc('dstoolbox') dstoolbox> and the 
-% <matlab:doc('muitoolbox') muitoolbox>
+% <matlab:doc('muitoolbox') muitoolbox>.
 
 %% Background
 % Utility to analyse settling column data based on the analysis method
