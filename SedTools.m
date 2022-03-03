@@ -105,10 +105,8 @@ classdef SedTools < muiModelUI
             menu.Run(1).Callback = repmat({@obj.runMenuOptions},[1,2]);
             
             %% Plot menu --------------------------------------------------  
-            menu.Analysis(1).List = {'Plots'};
-            menu.Analysis(1).Callback = {@obj.analysisMenuOptions};
-            % menu.Analysis(1).List = {'Plots','Statistics'};
-            % menu.Analysis(1).Callback = repmat({@obj.analysisMenuOptions},[1,2]);
+            menu.Analysis(1).List = {'Plots','Statistics'};
+            menu.Analysis(1).Callback = repmat({@obj.analysisMenuOptions},[1,2]);
             
             %% Help menu --------------------------------------------------
             menu.Help(1).Callback = {@obj.Help}; %make model specific?
@@ -142,9 +140,10 @@ classdef SedTools < muiModelUI
                'SettlingParams','Inputs',[0.95,0.50],{180,60},'Settling parameters:'};
         end      
  %%
-        function setTabAction(~,src,cobj)
+        function setTabAction(obj,src,cobj)
             %function required by muiModelUI and sets action for selected
             %tab (src)
+            msg = 'No results to display';
             switch src.Tag                   
                 case 'Plot' 
                     tabPlot(cobj,src);

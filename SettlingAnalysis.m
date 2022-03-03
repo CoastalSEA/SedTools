@@ -87,56 +87,41 @@ classdef SettlingAnalysis < muiDataSet
     methods
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Q-Plot tab
-            dst = obj.Data.Dataset;
-            stats = obj.Stats;           
-            %--------------------------------------------------------------
-            %extract data vectors, eg:
-            gs = dst.Dimensions.D;
-            cf = dst.cumfreq;
-            sf = dst.sedfreq;
-            units = dst.DimensionUnits{1};
-            szclass = getSizeClasses(obj,units,gs);
-            
-            %surface plot of 3D form
-            ht = findobj(src,'Type','panel');
-            delete(ht);  
-            hp1 = uipanel('Parent',src,'Position',[0,0,0.7,1],'Tag','PlotTab');
-            ax = axes('Parent',hp1,'Tag','MyPlot');
-            if strcmp(units,'phi')
-                ax.XDir = 'reverse';
-                szclass = flipud(szclass);
-                sf = flipud(sf);
+            if strcmp(src.Tag,'FigButton')
+                hfig = figure('Tag','PlotFig');
+                ax = axes('Parent',hfig,'Tag','PlotFig','Units','normalized');
+                grainSizePlot(obj,ax);
             else
-                ax.XScale = 'log';
+                ht = findobj(src,'Type','panel');
+                delete(ht);
+                hp1 = uipanel('Parent',src,'Position',[0,0,0.7,1],'Tag','PlotTab');
+                ax = axes('Parent',hp1,'Tag','MyPlot');
+                grainSizePlot(obj,ax);
+                
+                %now display table of stats
+                stats = obj.Stats; 
+                hp2 = uipanel('Parent',src,'Position',[0.7,0,0.3,1],...
+                    'BorderType','none','Tag','PlotTab');
+                ht = uitable(hp2,'RowName',stats.Properties.RowNames,...
+                    'ColumnName',{'Value'},...
+                    'ColumnWidth',{60},'Data',stats.Value,...
+                    'Units','normalized','Position',[0.02,0,0.98,0.9]);
+                ht.Position(3) = ht.Extent(3)+0.1;
+                ht.Position(2) = 0.1;
+                %button to copy data to clipboard
+                uicontrol('Parent',hp2,'Style','pushbutton',...
+                    'String','Copy to clipboard','UserData',stats,...
+                    'TooltipString','Copy stats table to clipboard',...
+                    'Units','normalized','Position',[0.2 0.02 0.6 0.06],...
+                    'Callback',@copydata2clip);
+                %button to create plot as stand-alone figure
+                uicontrol('Parent',hp1,'Style','pushbutton',...
+                    'String','>Figure','Tag','FigButton',...
+                    'TooltipString','Create plot as stand alone figure',...
+                    'Units','normalized','Position',[0.88 0.95 0.10 0.044],...
+                    'Callback',@(src,evdat)tabPlot(obj,src));
             end
-            xlabel(sprintf('%s (%s)',dst.DimensionLabels{1},units));
-            yyaxis left
-            %bar(ax,gs,sf);
-            histogram(ax,'BinEdges',szclass','BinCounts',sf)
-            ylabel('Grain-size frequency (%)');
-            yyaxis right
-            plot(ax,gs,cf,'-r','LineWidth',1);
-            ylabel('Cummulative frequency distribution (%)');
-            ylim([0,100]);
-            title (dst.Description);           
-            ax.Color = [0.96,0.96,0.96];  %needs to be set after plot 
-            
-            %now display table of stats
-            hp2 = uipanel('Parent',src,'Position',[0.7,0,0.3,1],...
-                'BorderType','none','Tag','PlotTab');
-            ht = uitable(hp2,'RowName',stats.Properties.RowNames,...
-                'ColumnName',{'Value'},...
-                'ColumnWidth',{60},'Data',stats.Value,...
-                'Units','normalized','Position',[0.02,0,0.98,0.9]);
-            ht.Position(3) = ht.Extent(3)+0.1;
-            ht.Position(2) = 0.1;
-            %button to copy data to clipboard
-            uicontrol('Parent',hp2,'Style','pushbutton',...                    
-                'String','Copy to clipboard','UserData',stats,...
-                'TooltipString','Copy stats table to clipboard',...
-                'Units','normalized','Position',[0.2 0.02 0.6 0.06],...                    
-                'Callback',@copydata2clip); 
-        end                
+        end
     end 
 %%    
     methods (Access = private)
@@ -168,6 +153,38 @@ classdef SettlingAnalysis < muiDataSet
                 sizeclasses = 2.^(-sizeclasses); 
             end
         end        
+%%
+        function grainSizePlot(obj,ax)
+            %default tab plot of grain-size distribution
+            dst = obj.Data.Dataset;        
+            %--------------------------------------------------------------
+            %extract data vectors, eg:
+            gs = dst.Dimensions.D;
+            cf = dst.cumfreq;
+            sf = dst.sedfreq;
+            units = dst.DimensionUnits{1};
+            szclass = getSizeClasses(obj,units,gs);
+            
+            %surface plot of 3D form
+            if strcmp(units,'phi')
+                ax.XDir = 'reverse';
+                szclass = flipud(szclass);
+                sf = flipud(sf);
+            else
+                ax.XScale = 'log';
+            end
+            xlabel(sprintf('%s (%s)',dst.DimensionLabels{1},units));
+            yyaxis left
+            %bar(ax,gs,sf);
+            histogram(ax,'BinEdges',szclass','BinCounts',sf)
+            ylabel('Grain-size frequency (%)');
+            yyaxis right
+            plot(ax,gs,cf,'-r','LineWidth',1);
+            ylabel('Cummulative frequency distribution (%)');
+            ylim([0,100]);
+            title (dst.Description);           
+            ax.Color = [0.96,0.96,0.96];  %needs to be set after plot 
+        end
 %%
         function dsp = modelDSproperties(~) 
             %define a dsproperties struct and add the model metadata
