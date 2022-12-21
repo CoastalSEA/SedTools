@@ -3,5 +3,5 @@
 % information about the inputs required for the analysis of settling column
 % output files
 %%
-% The <matlab:open_manual manual> provides further details of setup and 
+% The <matlab:sdt_open_manual manual> provides further details of setup and 
 % configuration of the analysis tool.

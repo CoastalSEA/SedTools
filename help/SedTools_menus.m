@@ -76,5 +76,5 @@
 % * *Help*: access the online documentation for CoastalTools.
 
 %% See Also
-% The <matlab:open_manual manual> provides further details of setup and 
+% The <matlab:sdt_open_manual manual> provides further details of setup and 
 % configuration of the model.

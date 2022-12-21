@@ -1,4 +1,4 @@
-function example_folder()
+function sdt_example_folder()
 %find the location of the example folder and open it
 appinfo = matlab.apputil.getInstalledAppInfo;
 idx = find(strcmp({appinfo.name},'SedTools'));
