@@ -2,7 +2,7 @@ classdef SettlingParams < muiPropertyUI
 %
 %-------class help---------------------------------------------------------
 % NAME
-%   PropsInput_template.m
+%   TransportParams.m
 % PURPOSE
 %   Class for settling model input parameters
 % USAGE

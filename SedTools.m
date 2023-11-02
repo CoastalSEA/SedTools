@@ -17,8 +17,8 @@ classdef SedTools < muiModelUI
 % 
     properties  (Access = protected)
         %implement properties defined as Abstract in muiModelUI
-        vNumber = '1.0'
-        vDate   = 'Jan 2021'
+        vNumber = '2.0'
+        vDate   = 'Nov 2023'
         modelName = 'SedTools'  
         %Properties defined in muiModelUI that need to be defined in setGui
         % ModelInputs  %classes required by model: used in isValidModel check 
@@ -39,7 +39,8 @@ classdef SedTools < muiModelUI
             %initialise standard figure and menus   
             %classes required to run model; format:          
             %obj.ModelInputs.<model classname> = {'Param_class1',Param_class2',etc}
-            obj.ModelInputs.SettlingAnalysis = {'SettlingParams'};              
+            obj.ModelInputs.SettlingAnalysis = {'SettlingParams'};    
+            obj.ModelInputs.TransportAnalysis = {'TransportParams','TideParams','SiteParams','RunParams'};    
             %tabs to include in DataUIs for plotting and statistical analysis
             %select which of the options are needed and delete the rest
             %Plot options: '2D','3D','4D','2DT','3DT','4DT'
@@ -97,12 +98,16 @@ classdef SedTools < muiModelUI
             menu.Project(3).Callback = repmat({@obj.projectMenuOptions},[1,2]);
             
             %% Setup menu -------------------------------------------------
-            menu.Setup(1).List = {'Settling Parameters','Model Constants'};                                                                      
-            menu.Setup(1).Callback = repmat({@obj.setupMenuOptions},[1,2]);
-            
+            menu.Setup(1).List = {'Settling Parameters','Transport Parameters','Model Constants'};                                                                      
+            menu.Setup(1).Callback = {@obj.setupMenuOptions,'gcbo;',@obj.setupMenuOptions};
+            menu.Setup(1).Separator = {'off','off','on'};%separator preceeds item
+
+            menu.Setup(2).List = {'Tidal Parameters','Sediment Parameters',...
+                                        'Site Parameters','Run Parameters'};
+            menu.Setup(2).Callback = repmat({@obj.setupMenuOptions},[1,4]);
             %% Run menu ---------------------------------------------------
-            menu.Run(1).List = {'Run Settling Analysis','Derive Output'};
-            menu.Run(1).Callback = repmat({@obj.runMenuOptions},[1,2]);
+            menu.Run(1).List = {'Settling Analysis','Transport Analysis','Derive Output'};
+            menu.Run(1).Callback = repmat({@obj.runMenuOptions},[1,3]);
             
             %% Plot menu --------------------------------------------------  
             menu.Analysis(1).List = {'Plots','Statistics'};
@@ -126,10 +131,11 @@ classdef SedTools < muiModelUI
             %    subtabs.<tagname>(i,:) = {<subtab label>,<callback function>};
             %where <tagname> is the struct fieldname for the top level tab.
             tabs.Cases  = {'   Cases  ',@obj.refresh};      
-            tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
+            tabs.Inputs = {'  Inputs  ',''};
+            subtabs.Inputs(1,:) = {' Settling ',@obj.InputTabSummary};
+            subtabs.Inputs(2,:) = {' Transport ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData};
             tabs.Stats = {'   Stats   ',@obj.setTabAction};
-            subtabs = [];
         end 
  %%
         function props = setTabProperties(~)
@@ -137,7 +143,11 @@ classdef SedTools < muiModelUI
             %props format: {class name, tab tag name, position, ...
             %               column width, table title}                                                    
             props = {...                                     
-               'SettlingParams','Inputs',[0.95,0.50],{180,60},'Settling parameters:'};
+               'SettlingParams','Settling',[0.95,0.5],{180,60},'Settling parameters:';...
+               'TideParams','Transport',[0.95,0.45],{180,60},'Tidal parameters:';...
+               'TransportParams','Transport',[0.95,0.95],{180,60},'Transport parameters:';...               
+               'SiteParams','Transport',[0.5,0.95],{180,60},'Site parameters:';...
+               'RunParams','Transport',[0.4,0.45],{180,60},'Run parameters:'};
         end      
  %%
         function setTabAction(obj,src,cobj)
@@ -168,21 +178,34 @@ classdef SedTools < muiModelUI
         %% Setup menu -----------------------------------------------------
         function setupMenuOptions(obj,src,~)
             %callback functions for data input
+            tabname = 'Transport';
             switch src.Text
                 case 'Settling Parameters'                
-                    SettlingParams.setInput(obj);                             
-                    tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
-                    InputTabSummary(obj,tabsrc);
+                    SettlingParams.setInput(obj);  
+                    tabname = 'Settling';
+                case 'Tidal Parameters'
+                    TideParams.setInput(obj);                   
+                case 'Sediment Parameters'
+                    TransportParams.setInput(obj); 
+                case 'Site Parameters'  
+                    SiteParams.setInput(obj); 
+                case 'Run Parameters'  
+                    RunParams.setInput(obj);     
                 case 'Model Constants'
                     obj.Constants = setInput(obj.Constants);
+                    tabname = [];
             end
+            %
+            tabUpdate(obj,tabname);
         end             
         %% Run menu -------------------------------------------------------
         function runMenuOptions(obj,src,~)
             %callback functions to run model
             switch src.Text                   
-                case 'Run Settling Analysis'                       
+                case 'Settling Analysis'                       
                     SettlingAnalysis.runModel(obj); 
+                case 'Transport Analysis'
+                    TransportAnalysis.runModel(obj);
                 case 'Derive Output'
                     obj.mUI.Manip = muiManipUI.getManipUI(obj);
             end 
@@ -202,5 +225,16 @@ classdef SedTools < muiModelUI
         function Help(~,~,~)
             doc sedtools                               
         end        
+    end
+%%
+%%
+    methods (Access=private)
+        function tabUpdate(obj,tabname)
+            %update tab used for properties if required
+            if ~isempty(tabname)
+                tabsrc = findobj(obj.mUI.Tabs,'Tag',tabname);
+                InputTabSummary(obj,tabsrc);
+            end 
+        end
     end
 end
