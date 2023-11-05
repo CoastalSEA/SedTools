@@ -4,7 +4,7 @@ function transport_plot(t,d,u,tau,qt,meta)
 % NAME
 %   transport_plot.m
 % PURPOSE
-%   plot results from the total transport model in the SedTools App
+%   plot results from the total load transport model in the SedTools App
 % USAGE
 %       transport_plot(t,d,u,tau,qt)
 % INPUTS

@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>SedTools</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-12-21"><meta name="DC.source" content="sedtools.m"><style type="text/css">
+      --><title>SedTools</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-11-02"><meta name="DC.source" content="sedtools.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,10 +67,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>SedTools</h1><!--introduction--><p>Matlab App for analysis of settling column data</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Licence</a></li><li><a href="#2">Requirements</a></li><li><a href="#3">Background</a></li><li><a href="#4">SedTools classes</a></li><li><a href="#5">SedTools functions</a></li><li><a href="#6">Manual</a></li><li><a href="#7">See Also</a></li></ul></div><h2 id="1">Licence</h2><p>The code is provided as Open Source code (issued under a GNU General Public License).</p><h2 id="2">Requirements</h2><p>SedTools is written in Matlab&#8482; and requires v2016b, or later. In addition, SedTools requires both the <a href="matlab:doc('dstoolbox')">dstoolbox</a> and the <a href="matlab:doc('muitoolbox')">muitoolbox</a>.</p><h2 id="3">Background</h2><p>Utility to analyse settling column data based on the analysis method developed by Urs Neumeier, 2005. The source code of the core program and further details see <a href="http://neumeier.perso.ch/matlab/cal_settling.html">web site</a>.</p><h2 id="4">SedTools classes</h2><div><ul><li><b>SedTools</b> - defines the behaviour of the main UI.</li><li><b>SettlingParams</b> - defines the input parameters.</li><li><b>SettlingAnalysis</b> - handles the running of settling_column function, saving of results and display on the Q-Plot tab.</li></ul></div><h2 id="5">SedTools functions</h2><p><b>settling_column</b> - convert the record from the settling columns to grain size in units of mm or phi.</p><h2 id="6">Manual</h2><p>The <a href="matlab:sdt_open_manual">manual</a> provides further details of setup and configuration of the model. Sample input files can be found in the example folder <a href="matlab:sdt_example_folder">here</a>.</p><h2 id="7">See Also</h2><p><a href="matlab:doc('muitoolbox')">muitoolbox</a>, <a href="matlab:doc('dstoolbox')">dstoolbox</a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+  </style></head><body><div class="content"><h1>SedTools</h1><!--introduction--><p>Matlab App for analysis of settling column data and undertaking various sediment property and transport analyses.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Licence</a></li><li><a href="#2">Requirements</a></li><li><a href="#3">Background</a></li><li><a href="#4">SedTools classes</a></li><li><a href="#5">SedTools functions</a></li><li><a href="#6">muiAppCoastalFcns</a></li><li><a href="#7">Manual</a></li><li><a href="#8">See Also</a></li></ul></div><h2 id="1">Licence</h2><p>The code is provided as Open Source code (issued under a GNU General Public License).</p><h2 id="2">Requirements</h2><p>SedTools is written in Matlab&#8482; and requires v2016b, or later. In addition, SedTools requires both the <a href="matlab:doc('dstoolbox')">dstoolbox</a> and the <a href="matlab:doc('muitoolbox')">muitoolbox</a>.</p><h2 id="3">Background</h2><p>Utility to analyse settling column data based on the analysis method developed by Urs Neumeier, 2005. The source code of the core program and further details see <a href="http://neumeier.perso.ch/matlab/cal_settling.html">web site</a>. The total load transport model is based on Sousby &amp; van_Rijn in Dynamics of Marine Sands, 1997.</p><h2 id="4">SedTools classes</h2><div><ul><li><b>SedTools</b> - defines the behaviour of the main UI.</li><li><b>SettlingParams</b> - defines the input parameters.</li><li><b>SettlingAnalysis</b> - handles the running of settling_column function, saving of results and display on the Q-Plot tab.</li><li><b>RunParams</b> &#8211; run time parameters for total load transport model.</li><li><b>SiteParams</b> &#8211; wave and bed conditions at the site being modelled.</li><li><b>TideParams</b> &#8211; data entry of tidal properties for use in the tidal emulator model.</li><li><b>TransportAnalysis</b> &#8211; class to handle and call the total transport model.</li><li><b>TransportParams</b> &#8211; sediment parameters used in total load transport model</li></ul></div><h2 id="5">SedTools functions</h2><div><ul><li><b>settling_column</b> - convert the record from the settling columns to grain size in units of mm or phi.</li><li><b>sandwave</b> &#8211; compute the height and wave length of bed ripples using van Rijn (1984)</li><li><b>svr_transport</b> &#8211; function to calculate the total load transport using the equations of Soulsby-van Rijn in Dynamics of Marine Sands.</li><li><b>totaltransport_model</b> &#8211; run the total load transport model for SedTools App</li><li><b>transport_plot</b> &#8211;  plot results from the total load transport model in the SedTools App</li></ul></div><h2 id="6">muiAppCoastalFcns</h2><div><ul><li><b>celerity</b> &#8211; calculate the wave celerity using Hunt's equation</li><li><b>fluidprops</b> &#8211; calculate fluid density and kinematic viscosity based on salinity and temperature.</li><li><b>hb_break</b> &#8211; wave height after breaking for given water depth d</li><li><b>hs_break</b> &#8211; significant wave height after breaking for given water depth d</li><li><b>sedprops</b> &#8211;returns one of a range of sediment properties based on user selection</li><li><b>sediment_properties</b> &#8211; calculate a set of sediment properties based on bulk density</li><li><b>simple_tide</b> &#8211; compute a tidal water level time series using main constituents scaled to required tidal amplitude</li><li><b>tau_bed</b> &#8211; compute bed shear stress under combined wave-current action</li><li><b>tau_crit</b> &#8211; calculate the critical erosion shear stress and erosion rate for sand, mud or mixed sediments</li></ul></div><h2 id="7">Manual</h2><p>The <a href="matlab:sdt_open_manual">manual</a> provides further details of setup and configuration of the model. Sample input files can be found in the example folder <a href="matlab:sdt_example_folder">here</a>.</p><h2 id="8">See Also</h2><p><a href="matlab:doc('muitoolbox')">muitoolbox</a>, <a href="matlab:doc('dstoolbox')">dstoolbox</a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% SedTools
-% Matlab App for analysis of settling column data
+% Matlab App for analysis of settling column data and undertaking various sediment property and transport analyses.
 
 %% Licence
 % The code is provided as Open Source code (issued under a GNU General 
@@ -85,16 +85,38 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % Utility to analyse settling column data based on the analysis method
 % developed by Urs Neumeier, 2005. The source code of the core program and 
 % further details see <http://neumeier.perso.ch/matlab/cal_settling.html web site>. 
+% The total load transport model is based on Sousby & van_Rijn in Dynamics
+% of Marine Sands, 1997.
 
 %% SedTools classes
 % * *SedTools* - defines the behaviour of the main UI.
 % * *SettlingParams* - defines the input parameters.
 % * *SettlingAnalysis* - handles the running of settling_column function,
 % saving of results and display on the Q-Plot tab.
+% * *RunParams* – run time parameters for total load transport model.
+% * *SiteParams* – wave and bed conditions at the site being modelled.
+% * *TideParams* – data entry of tidal properties for use in the tidal emulator model.
+% * *TransportAnalysis* – class to handle and call the total transport model.
+% * *TransportParams* – sediment parameters used in total load transport model
 
 %% SedTools functions
-% *settling_column* - convert the record from the settling columns to 
+% * *settling_column* - convert the record from the settling columns to 
 % grain size in units of mm or phi.
+% * *sandwave* – compute the height and wave length of bed ripples using van Rijn (1984)
+% * *svr_transport* – function to calculate the total load transport using the equations of Soulsby-van Rijn in Dynamics of Marine Sands.
+% * *totaltransport_model* – run the total load transport model for SedTools App
+% * *transport_plot* –  plot results from the total load transport model in the SedTools App
+
+%% muiAppCoastalFcns
+% * *celerity* – calculate the wave celerity using Hunt's equation
+% * *fluidprops* – calculate fluid density and kinematic viscosity based on salinity and temperature.
+% * *hb_break* – wave height after breaking for given water depth d
+% * *hs_break* – significant wave height after breaking for given water depth d
+% * *sedprops* –returns one of a range of sediment properties based on user selection 
+% * *sediment_properties* – calculate a set of sediment properties based on bulk density
+% * *simple_tide* – compute a tidal water level time series using main constituents scaled to required tidal amplitude  
+% * *tau_bed* – compute bed shear stress under combined wave-current action
+% * *tau_crit* – calculate the critical erosion shear stress and erosion rate for sand, mud or mixed sediments
 
 %% Manual
 % The <matlab:sdt_open_manual manual> provides further details of setup and 

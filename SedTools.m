@@ -106,9 +106,11 @@ classdef SedTools < muiModelUI
                                         'Site Parameters','Run Parameters'};
             menu.Setup(2).Callback = repmat({@obj.setupMenuOptions},[1,4]);
             %% Run menu ---------------------------------------------------
-            menu.Run(1).List = {'Settling Analysis','Transport Analysis','Derive Output'};
-            menu.Run(1).Callback = repmat({@obj.runMenuOptions},[1,3]);
-            
+            menu.Run(1).List = {'Settling Analysis','Transport Analysis',...
+                                    'Sediment Properties','Derive Output'};
+            menu.Run(1).Callback = repmat({@obj.runMenuOptions},[1,4]);
+            menu.Run(1).Separator = {'off','off','off','on'};%separator preceeds item
+
             %% Plot menu --------------------------------------------------  
             menu.Analysis(1).List = {'Plots','Statistics'};
             menu.Analysis(1).Callback = repmat({@obj.analysisMenuOptions},[1,2]);
@@ -206,6 +208,8 @@ classdef SedTools < muiModelUI
                     SettlingAnalysis.runModel(obj); 
                 case 'Transport Analysis'
                     TransportAnalysis.runModel(obj);
+                case 'Sediment Properties'
+                    sediment_properties();
                 case 'Derive Output'
                     obj.mUI.Manip = muiManipUI.getManipUI(obj);
             end 

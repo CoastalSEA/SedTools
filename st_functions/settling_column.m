@@ -1,4 +1,6 @@
 function [grainsize,results,stats,method] = settling_column(data,inp)
+%
+%-------header-------------------------------------------------------------
 % NAME
 %   settling_column.m
 % PURPOSE
@@ -25,10 +27,10 @@ function [grainsize,results,stats,method] = settling_column(data,inp)
 %                first column: parameter name, second column: value.
 % NOTES
 %  based on cal_settling by Urs Neumeier, 2005, http://neumeier.perso.ch/matlab/cal_settling.html
-% AUTHOR
-%   Ian Townend
-% COPYRIGHT
-%   CoastalSEA (c) Feb 2019
+%
+% Author: Ian Townend
+% CoastalSEA (c) ) Feb 2019
+%--------------------------------------------------------------------------
 %
     temp = inp.Temperature;
     density = inp.SedimentDensity;

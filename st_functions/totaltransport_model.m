@@ -4,7 +4,7 @@ function [results,meta,modeltime] = totaltransport_model(mobj)
 % NAME
 %   totaltransport_model.m
 % PURPOSE
-%   run the total transport model for SedTools App
+%   run the total load transport model for SedTools App
 % USAGE
 %    [results,xy,modeltime] = totaltransport_model(mobj) 
 % INPUTS

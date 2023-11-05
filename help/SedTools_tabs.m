@@ -5,7 +5,11 @@
 
 %% Summary of Tabs
 % * *Cases*: lists the cases that have been run with a case id and description.
-% * *Inputs*: summmary of the properties that have been defined
+% * *Inputs*: summmary of the properties that have been defined on two
+% sub-tabs:
+% * _Settling_: parameter settings for the settling column analysis
+% * _Transport_: parameters settings for the various inputs required for
+% the total load transport analysis (4 parameter tables).
 % * *Q-Plot*: user selects a variable from imported data or model output, and creates a plot on the tab. The plot cannot be edited.
 % * *Stats*: tabulates the results from statistics UI.
 

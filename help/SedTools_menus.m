@@ -35,7 +35,7 @@
 % parameters.
 % * *Model Constants*: a number of constants are used in the model. Generally, the default values are appropriate but these can be adjusted and saved with the project if required.
 %%
-% *Settling Parameters Input* - the inputs required are as follows:
+% * *Settling Parameters* - the inputs required are as follows:
 %%
 %     Temperature during the settling experiment (*).
 %     Density of the sediment used (*).
@@ -46,26 +46,38 @@
 %     The resolution to be used in the output (values are 1/phi)
 %     Units to display output
 %%
-% (*) If multiple data sets are being averaged, multiple values can be 
-% entered, with the number of values equal to the number of input files. 
-% Otherwise the first value is replicated for all data sets. 
+%     (*) If multiple data sets are being averaged, multiple values can be 
+%     entered, with the number of values equal to the number of input files. 
+%     Otherwise the first value is replicated for all data sets. 
 %%
-% (+) Methods: 1 = Gibbs et al. (1971); 2 = Baba and Komar (1981); 3 = van Rijn (1993); 4 = Soulsby (1997). 
+%     (+) Methods: 1 = Gibbs et al. (1971); 2 = Baba and Komar (1981); 3 = van Rijn (1993); 4 = Soulsby (1997). 
 %%
-% *References*
+%     *References*
 %%
-% # Gibbs R.J., Matthews M.D. and Link D.A. (1971) The relationship between sphere size and settling velocity. Journal of sedimentary Petrology, 41/1, 7-18.
-% # Baba J. & Komar P.D. (1981) Measurements and analysis of settling velocities of natural quartz sand grains. Journal of sedimentary Petrolology, 51, 631-640.
-% # van Rijn L.C. (1993) Principles of sediment transport in rivers, estuaries and coastal seas. Aqua Publications.
-% # Soulsby R. (1997) Dynamics of marine sands: a manual for practical applications. Thomas Telford.
+%     1. Gibbs R.J., Matthews M.D. and Link D.A. (1971) The relationship between sphere size and settling velocity. Journal of sedimentary Petrology, 41/1, 7-18.
+%     2. Baba J. & Komar P.D. (1981) Measurements and analysis of settling velocities of natural quartz sand grains. Journal of sedimentary Petrolology, 51, 631-640.
+%     3. van Rijn L.C. (1993) Principles of sediment transport in rivers, estuaries and coastal seas. Aqua Publications.
+%     4. Soulsby R. (1997) Dynamics of marine sands: a manual for practical applications. Thomas Telford.
 %%
+% * *Transport Parameters* using the following sub menus:
+%%
+% * _Tidal Parameters_: define the tidal conditions, i.e., tidal amplitude,
+% velocity, phase, etc.
+% * _Sediment Parameters_: define sediment properties used in the model,
+% i.e. D50, D90, density of bed, etc. Note that grain sizes are in metres.
+% * _Site Parameters_: define the conditions at the site being examined,
+% i.e., wave conditions, bed description, etc. 
+% * _Run Parameters_: specify the duration and time to be used, i.e.,
+% duration and time step.
 
 %% Run
-% * *Run Settling Analysis*: runs analysis of settlingm column output files.
+% * *Settling Analysis*: runs analysis of settlingm column output files.
 % Multiple files can be selected to take the analyse the average of across
 % all selected files. On completion the first file name is given as the
 % default Case description, and can be edited before being saved. The 
 % results are added to the listing on the Cases tab and can viewed on the Q-Plot tab.
+% * *Transport Analysis*: runs model, prompts for Case description which is added to the listing on the Cases tab and the results can be displayed and plotted from the Q-Plot tab. 
+% * *Sediment Properties*: utility to compute a range of sediment properties based in the sediment bulk density and optionally other properties such as temperature and salinity.
 % * *Derive Output*: initialises the Derive Output UI to select and define manipulations of the data or call external functions and load the result as new data set.
 
 %% Analysis
