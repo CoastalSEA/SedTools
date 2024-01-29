@@ -74,7 +74,7 @@ classdef SettlingAnalysis < muiDataSet
             %--------------------------------------------------------------                      
             %assign metadata about model
             dst.Source = metaclass(obj).Name;
-            dst.MetaData = metatxt;
+            dst.MetaData = metatxt{:};
             obj.Stats = cell2table(stats(:,2),'RowNames',stats(:,1),...
                 'VariableNames',{'Value'});
             %save results
