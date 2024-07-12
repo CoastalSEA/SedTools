@@ -46,6 +46,7 @@ classdef TransportAnalysis < muiDataSet
 % Model code 
 %--------------------------------------------------------------------------
             [results,meta,modeltime] = totaltransport_model(mobj);
+            if isempty(results), return; end
 %--------------------------------------------------------------------------
 % Assign model output to a dstable using the defined dsproperties meta-data
 %--------------------------------------------------------------------------                   

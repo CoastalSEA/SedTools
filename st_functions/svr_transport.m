@@ -26,11 +26,16 @@ function qt = svr_transport(d,U,Hs,Tp,d50,d90,beta,cn)
 % CoastalSEA (c) Nov 2023
 %--------------------------------------------------------------------------
 %
+    qt = [];
     depthmask = (d==0);
-    %critical threshold velocity
+    %critical threshold velocity    
     if length(d50)>1
         id1 = find(d50>=0.0001 & d50<=0.0005);
         id2 = find(d50>0.0005 & d50<=0.002);
+        if isempty(id1) && isempty(id2)
+            warndlg('d50 outside valid range in svr_transport');
+            return;
+        end
         Ucr(id1,1) = 0.19*d50(id1).^0.1.*log10(4*d(id1)./d90(id1));
         Ucr(id2,1) = 8.5*d50(id2).^0.6.*log10(4*d(id2)./d90(id2));
         Ucr(depthmask) = 0;
@@ -40,8 +45,7 @@ function qt = svr_transport(d,U,Hs,Tp,d50,d90,beta,cn)
         elseif d50>0.0005 && d50<=0.002
             Ucr = 8.5*d50.^0.6.*log10(4*d./d90);
         else
-            warndlg('d50 outside valid range in svr_transport');
-            qt = [];
+            warndlg('d50 outside valid range in svr_transport');           
             return;
         end
     end

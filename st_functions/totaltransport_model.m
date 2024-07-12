@@ -19,6 +19,7 @@ function [results,meta,modeltime] = totaltransport_model(mobj)
 % CoastalSEA (c) Nov 2023
 %--------------------------------------------------------------------------
 %
+    results =[]; meta = []; modeltime = [];
     %handles to input classes
     tideobj = mobj.Inputs.TideParams;     
     siteobj = mobj.Inputs.SiteParams;  
@@ -66,16 +67,15 @@ function [results,meta,modeltime] = totaltransport_model(mobj)
     
     %temperature/salinity dependent density of water and kinematic viscosity
     [cn.rhow,cn.visc] = fluidprops(seds.Salinity,seds.WaterTemp);
-
     
     %bed shear stress for combined waves and currents
-    if site.RippleHeight>0
-        %For ripples of height, D and wavelength L, 
-        %an equivalent d50 grainsize of approximately d50 = 12*D^2/L can be used.
-        d90tod50 = seds.D90/seds.D50;
-        seds.D50 = 12*site.RippleHeight^2/site.RippleLength;
-        seds.D90 = d50*d90tod50;
-    end
+%     if site.RippleHeight>0
+%         %For ripples of height, D and wavelength L, 
+%         %an equivalent d50 grainsize of approximately d50 = 12*D^2/L can be used.
+%         d90tod50 = seds.D90/seds.D50;
+%         seds.D50 = 12*site.RippleHeight^2/site.RippleLength;
+%         seds.D90 = seds.D50*d90tod50;
+%     end
     d50v = blanks*seds.D50;
     d90v = blanks*seds.D90;
     
@@ -89,6 +89,7 @@ function [results,meta,modeltime] = totaltransport_model(mobj)
     [tau.taucr,~] = tau_crit(seds.BedDensity,seds.D50,seds.PercentMud/100,cn.visc,cn.rhow,cn.rhos);
 
     qt = svr_transport(d,u,Hs,Tp,d50v,d90v,1/site.BedSlope,cn);
+    if isempty(qt), return; end
     netqt = sum(qt,'omitnan');
     [delta,lambda] = sandwave(d,tau.taux,tau.taucr,seds.D50);
     txt1 = sprintf('Erosion threshold = %1.3g N/m^2; Net transport = %1.3g m^3/m/s',tau.taucr,netqt);
