@@ -215,7 +215,7 @@ classdef SedTools < muiModelUI
                 case 'Sediment Properties'
                     sediment_properties();
                 case 'Derive Output'
-                    obj.mUI.Manip = muiManipUI.getManipUI(obj);
+                    obj.mUI.ManipUI = muiManipUI.getManipUI(obj);
             end 
             DrawMap(obj);
         end 
